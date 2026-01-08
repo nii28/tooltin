@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn Tập Tin Học 10 - Học kì I</title>
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --secondary: #7c3aed;
+            --success: #10b981;
+            --error: #ef4444;
+            --bg: #f8fafc;
+            --text: #1e293b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', system-ui, sans-serif; }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 15px;
+        }
+
+        .quiz-card {
+            background: white;
+            width: 100%;
+            max-width: 700px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid #e2e8f0;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            padding: 20px;
+            color: white;
+            text-align: center;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background: #f1f5f9;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .progress-container { height: 6px; background: #e2e8f0; }
+        .progress-fill { height: 100%; background: #fbbf24; width: 0%; transition: width 0.3s; }
+
+        .content { padding: 30px; flex-grow: 1; min-height: 350px; }
+
+        .question-label { color: var(--primary); font-weight: 700; margin-bottom: 10px; display: block; }
+        .question-text { font-size: 1.2rem; line-height: 1.5; margin-bottom: 25px; }
+
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option-btn {
+            padding: 15px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            background: white;
+            text-align: left;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .option-btn:hover:not(:disabled) { border-color: var(--primary); background: #f5f3ff; }
+
+        .option-btn.correct { background: #d1fae5; border-color: var(--success); color: #065f46; font-weight: 600; }
+        .option-btn.wrong { background: #fee2e2; border-color: var(--error); color: #991b1b; }
+
+        .tf-container { display: flex; flex-direction: column; gap: 15px; }
+        .tf-row { background: #f8fafc; padding: 15px; border-radius: 12px; border: 1px solid #e2e8f0; }
+        .tf-btns { display: flex; gap: 10px; margin-top: 10px; }
+        .tf-btn {
+            flex: 1; padding: 10px; border: 1px solid #cbd5e1; border-radius: 8px;
+            background: white; cursor: pointer; font-weight: 600;
+        }
+        .tf-btn.selected-true { background: var(--success); color: white; border-color: var(--success); }
+        .tf-btn.selected-false { background: var(--error); color: white; border-color: var(--error); }
+        .tf-btn.correct-hint { border: 2px solid var(--success); box-shadow: 0 0 10px rgba(16, 185, 129, 0.3); }
+
+        .footer {
+            padding: 20px;
+            background: #f8fafc;
+            border-top: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .nav-btn {
+            padding: 10px 25px;
+            border: none;
+            border-radius: 10px;
+            background: var(--primary);
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .nav-btn:disabled { background: #cbd5e1; cursor: not-allowed; }
+
+        .hidden { display: none; }
+        #result-screen { text-align: center; padding: 40px; }
+    </style>
+</head>
+<body>
+
+<div class="quiz-card">
+    <div class="header">
+        <h2>ĐỀ CƯƠNG ÔN TẬP TIN HỌC 10</h2>
+        <p>Học kì I - Chế độ luyện tập</p>
+    </div>
+    <div class="status-bar">
+        <span>Câu: <span id="curr-idx">1</span>/<span id="total-idx">32</span></span>
+        <span>Đúng: <span id="score-right" style="color:var(--success)">0</span> | Sai: <span id="score-wrong" style="color:var(--error)">0</span></span>
+    </div>
+    <div class="progress-container">
+        <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <div class="content" id="main-content">
+        <!-- Nội dung hiển thị ở đây -->
+    </div>
+
+    <div class="footer">
+        <button class="nav-btn" id="prev-btn" onclick="prev()">Câu trước</button>
+        <button class="nav-btn" id="next-btn" onclick="next()">Câu sau</button>
+    </div>
+</div>
+
+<script>
+    const quizData = [
+        // PHẦN I: TRẮC NGHIỆM
+        { q: "4GB = ? B", options: ["2^32 B", "2^22 B", "2^20 B", "2^34 B"], a: 0 },
+        { q: "Vấn đề tiêu cực khi dùng Internet:", options: ["Học trực tuyến.", "Gửi email.", "Bắt nạt qua mạng.", "Đăng thông tin cần thiết."], a: 2 },
+        { q: "Trong NNLT Python, phép toán chia lấy phần nguyên là:", options: ["mod", "%", "div", "//"], a: 3 },
+        { q: "Thông tin là:", options: ["Hiểu biết của con người về sự vật.", "Hình ảnh, âm thanh.", "Văn bản và số liệu.", "Văn bản, hình ảnh, âm thanh."], a: 0 },
+        { q: "Để mở tệp ảnh trong GIMP ta chọn:", options: ["File / New", "File / Export As", "File / Exit", "File / Open"], a: 3 },
+        { q: "Nếu bị bắt nạt qua mạng, em sẽ chọn cách phòng vệ hợp lý nhất?", options: ["Tìm kiếm sự trợ giúp từ bạn thân, thầy cô giáo và người thân trong gia đình.", "Không xài mạng xã hội.", "Lên mạng kêu gọi sự đồng cảm.", "Lên mạng thanh minh."], a: 0 },
+        { q: "Dịch vụ hội nghị trực tuyến trên đám mây:", options: ["Google Meet", "Viettel IDC", "Outlook Email", "iCloud"], a: 0 },
+        { q: "Phát biểu phù hợp nhất về khả năng của máy tính:", options: ["Tất cả các ý trên.", "Giải trí.", "Soạn thảo văn bản.", "Xử lí thông tin."], a: 0 },
+        { q: "Phần mềm tự động hiện quảng cáo:", options: ["Virus", "Worm", "Spyware", "Adware"], a: 3 },
+        { q: "print(20 % 2) cho kết quả:", options: ["1", "0", "3", "2"], a: 1 },
+        { q: "Khẳng định sai về máy tính:", options: ["Nhỏ gọn.", "Không thể kết nối.", "Xử lí nhanh.", "Lưu trữ lớn."], a: 1 },
+        { q: "Chọn phản ánh tác động tích cực của mạng Internet?", options: ["Học trực tuyến có phương pháp, học lực được cải thiện.", "Lộ thông tin cá nhân.", "Tìm sẵn đáp án trên mạng.", "Tạo thói quen xấu: lười suy nghĩ."], a: 0 },
+        { q: "Điều nào sau đây có thể tránh máy tính bị lây nhiễm phần mềm độc hại?", options: ["Tải phần mềm từ trang không đáng tin cậy.", "Nháy chuột vào quảng cáo hấp dẫn rồi chuyển tới trang web lạ.", "Sử dụng phần mềm diệt virus.", "Dùng USB từ máy lạ mà không kiểm tra virus."], a: 2 },
+        { q: "Điện toán đám mây không thể cung cấp dịch vụ nào?", options: ["Thư tín điện tử.", "Cung cấp máy chủ.", "Bảo trì phần cứng tại gia đình.", "Lưu trữ."], a: 2 },
+        { q: "Thông tin trong máy tính có dạng:", options: ["Hình ảnh.", "Văn bản.", "Âm thanh.", "Dãy bit."], a: 3 },
+        { q: "Máy tính trở thành công cụ không thể thiếu vì:", options: ["Tính toán nhanh.", "Soạn thảo văn bản.", "Lưu trữ và xử lý thông tin.", "Giải mọi bài toán."], a: 2 },
+        { q: "Khẳng định nào sau đây đúng khi nói về mạng Internet?", options: ["Không cần trả phí.", "Kết nối máy tính trong phạm vi nhỏ.", "Thuộc quyền sở hữu một tổ chức.", "Phải thuê bao dịch vụ đường truyền băng thông rộng."], a: 3 },
+        { q: "Để thay đổi kích thước ảnh ta dùng công cụ:", options: ["Transform", "Scale", "Crop", "Move"], a: 1 },
+        { q: "Phát biểu nào sau đây đúng về mạng Internet?", options: ["Mạng trong phạm vi quốc gia.", "Là mạng toàn cầu.", "Mạng trong thành phố.", "Bán kính nhỏ hơn LAN."], a: 1 },
+        { q: "Khẳng định nào sau đây là sai khi nói về GIMP?", options: ["Thiết kế đồ họa.", "Có công cụ vẽ.", "Chỉnh sửa ảnh.", "Không thể ghép ảnh."], a: 3 },
+        { q: "Hãy chọn tên dịch vụ không thuộc dịch vụ lưu trữ trên điện toán đám mây?", options: ["OneDrive", "DropBox", "Yahoo! Mail", "Google Drive"], a: 2 },
+        { q: "Tên biến Python đúng:", options: ["1.Bai", "Bai1", "Bai#1", "Bai 1"], a: 1 },
+        { q: "Hành vi nào sau đây Không vi phạm đạo đức, pháp luật và văn hóa khi sử dụng mạng?", options: ["Mua bản quyền phần mềm.", "Đưa thông tin không đúng sự thật.", "Ứng xử thiếu văn hóa.", "Bắt nạt qua mạng."], a: 0 },
+        { q: "Để tạo tệp ảnh mới ta chọn:", options: ["File / Open", "File / Exit", "File / New", "File / Save"], a: 2 },
+        { q: "Mật khẩu mạnh gồm:", options: ["Chữ hoa.", "Chữ số.", "Chữ thường.", "Chữ hoa, thường, số, ký tự đặc biệt."], a: 3 },
+        { q: "Để tạo lớp mới ta chọn:", options: ["File / New", "Layer / New Layer", "File / Exit", "File / Open"], a: 1 },
+        { q: "Trong NNLT Python, kết quả xuất hiện trên màn hình sau khi thực hiện câu lệnh print(\"3+5\") là:", options: ["‘3+5’", "3+5", "8", "35"], a: 1 },
+        { q: "Trong NNLT Python, kết quả của biến x sau khi thực hiện câu lệnh x = (20 // 5) là:", options: ["2", "0", "4", "16"], a: 2 },
+
+        // PHẦN II: ĐÚNG / SAI
+        { 
+            type: "tf", 
+            q: "Trong phần mềm chỉnh sửa ảnh GIMP:", 
+            sub: [
+                { text: "a. Tô màu thuần nhất là phủ dải màu chuyển dần.", a: false },
+                { text: "b. Có thể cắt ảnh bằng công cụ Crop.", a: true },
+                { text: "c. Chỉ có một lớp ảnh background.", a: false },
+                { text: "d. Chỉ tạo vùng chọn bằng hình chữ nhật và elip.", a: false }
+            ] 
+        },
+        { 
+            type: "tf", 
+            q: "Khi nói về mạng máy tính:", 
+            sub: [
+                { text: "a. Internet không có học liệu.", a: false },
+                { text: "b. Có thể bị lây nhiễm phần mềm độc hại.", a: true },
+                { text: "c. Chỉ cài antivirus mới ngăn virus.", a: false },
+                { text: "d. Xác thực hai bước giúp bảo vệ dữ liệu.", a: true }
+            ] 
+        },
+        { 
+            type: "tf", 
+            q: "Nhận định về tin học:", 
+            sub: [
+                { text: "a. Internet là thành tựu lớn của tin học.", a: true },
+                { text: "b. Thiết bị thông minh chỉ cần Internet.", a: false },
+                { text: "c. CMCN 4.0 là sản xuất thông minh.", a: true },
+                { text: "d. AI chưa từng thắng con người.", a: false }
+            ] 
+        },
+        { 
+            type: "tf", 
+            q: "Nhận định khác:", 
+            sub: [
+                { text: "a. Tốc độ tính toán là số phép toán/giây.", a: true },
+                { text: "b. AI là thành tựu của tin học.", a: true },
+                { text: "c. Bán tài khoản game là lừa đảo.", a: true },
+                { text: "d. Like tin sai sự thật không vi phạm pháp luật.", a: false }
+            ] 
+        }
+    ];
+
+    let currentIdx = 0;
+    let score = { right: 0, wrong: 0 };
+    let userAnswers = new Array(quizData.length).fill(null);
+
+    const mainContent = document.getElementById('main-content');
+    const currIdxEl = document.getElementById('curr-idx');
+    const rightEl = document.getElementById('score-right');
+    const wrongEl = document.getElementById('score-wrong');
+    const progressFill = document.getElementById('progress-fill');
+
+    function renderQuestion() {
+        const data = quizData[currentIdx];
+        currIdxEl.innerText = currentIdx + 1;
+        progressFill.style.width = `${((currentIdx + 1) / quizData.length) * 100}%`;
+        
+        mainContent.innerHTML = '';
+        const label = document.createElement('span');
+        label.className = 'question-label';
+        label.innerText = currentIdx < 28 ? `I. TRẮC NGHIỆM` : `II. ĐÚNG / SAI`;
+        
+        const qText = document.createElement('div');
+        qText.className = 'question-text';
+        qText.innerHTML = `<strong>Câu ${currentIdx + 1}:</strong> ${data.q}`;
+
+        mainContent.appendChild(label);
+        mainContent.appendChild(qText);
+
+        if (data.type === 'tf') {
+            renderTF(data);
+        } else {
+            renderMC(data);
+        }
+
+        document.getElementById('prev-btn').disabled = currentIdx === 0;
+        document.getElementById('next-btn').innerText = currentIdx === quizData.length - 1 ? "Kết quả" : "Câu sau";
+    }
+
+    function renderMC(data) {
+        const optionsDiv = document.createElement('div');
+        optionsDiv.className = 'options';
+        
+        data.options.forEach((opt, idx) => {
+            const btn = document.createElement('button');
+            btn.className = 'option-btn';
+            btn.innerText = opt;
+
+            if (userAnswers[currentIdx] !== null) {
+                btn.disabled = true;
+                if (idx === data.a) btn.classList.add('correct');
+                if (idx === userAnswers[currentIdx] && idx !== data.a) btn.classList.add('wrong');
+            } else {
+                btn.onclick = () => selectMC(idx);
+            }
+            optionsDiv.appendChild(btn);
+        });
+        mainContent.appendChild(optionsDiv);
+    }
+
+    function renderTF(data) {
+        const container = document.createElement('div');
+        container.className = 'tf-container';
+        
+        if (!userAnswers[currentIdx]) userAnswers[currentIdx] = {};
+
+        data.sub.forEach((item, sIdx) => {
+            const row = document.createElement('div');
+            row.className = 'tf-row';
+            row.innerHTML = `<div>${item.text}</div>`;
+            
+            const btns = document.createElement('div');
+            btns.className = 'tf-btns';
+            
+            const btnT = document.createElement('button');
+            btnT.className = 'tf-btn';
+            btnT.innerText = "Đúng";
+            
+            const btnF = document.createElement('button');
+            btnF.className = 'tf-btn';
+            btnF.innerText = "Sai";
+
+            const userChoice = userAnswers[currentIdx][sIdx];
+            if (userChoice !== undefined) {
+                btnT.disabled = true;
+                btnF.disabled = true;
+                if (userChoice === true) btnT.classList.add('selected-true');
+                if (userChoice === false) btnF.classList.add('selected-false');
+                
+                // Hiện hint đúng/sai nếu làm sai
+                if (userChoice !== item.a) {
+                    if (item.a === true) btnT.classList.add('correct-hint');
+                    else btnF.classList.add('correct-hint');
+                }
+            } else {
+                btnT.onclick = () => selectTF(sIdx, true);
+                btnF.onclick = () => selectTF(sIdx, false);
+            }
+
+            btns.appendChild(btnT);
+            btns.appendChild(btnF);
+            row.appendChild(btns);
+            container.appendChild(row);
+        });
+        mainContent.appendChild(container);
+    }
+
+    function selectMC(idx) {
+        userAnswers[currentIdx] = idx;
+        if (idx === quizData[currentIdx].a) score.right++;
+        else score.wrong++;
+        updateStats();
+        renderQuestion();
+    }
+
+    function selectTF(subIdx, val) {
+        userAnswers[currentIdx][subIdx] = val;
+        if (val === quizData[currentIdx].sub[subIdx].a) score.right++;
+        else score.wrong++;
+        updateStats();
+        renderQuestion();
+    }
+
+    function updateStats() {
+        rightEl.innerText = score.right;
+        wrongEl.innerText = score.wrong;
+    }
+
+    function next() {
+        if (currentIdx < quizData.length - 1) {
+            currentIdx++;
+            renderQuestion();
+        } else showResult();
+    }
+
+    function prev() {
+        if (currentIdx > 0) {
+            currentIdx--;
+            renderQuestion();
+        }
+    }
+
+    function showResult() {
+        document.querySelector('.status-bar').style.display = 'none';
+        document.querySelector('.footer').style.display = 'none';
+        const totalPoints = score.right;
+        const totalQuestions = 28 + (4 * 4); // 28 câu đơn + 4 câu mỗi câu 4 ý nhỏ
+        
+        mainContent.innerHTML = `
+            <div id="result-screen">
+                <h1 style="color:var(--primary)">HOÀN THÀNH!</h1>
+                <div style="font-size: 3rem; margin: 20px 0;">🎉</div>
+                <p style="font-size: 1.2rem">Bạn đã trả lời đúng <b>${score.right}</b> ý.</p>
+                <p style="color: #64748b">Sai <b>${score.wrong}</b> ý.</p>
+                <button class="nav-btn" style="margin-top: 30px;" onclick="location.reload()">Luyện tập lại</button>
+            </div>
+        `;
+    }
+
+    window.onload = () => {
+        document.getElementById('total-idx').innerText = quizData.length;
+        renderQuestion();
+    };
+</script>
+
+</body>
+</html>
+
