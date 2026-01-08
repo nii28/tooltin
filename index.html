@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn tập Tin học 10 – Học kì I (Phần 1)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .question {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .option {
+            margin: 8px 0;
+        }
+        .ds-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: #eef5ff;
+            border-radius: 8px;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #2ecc71;
+            color: white;
+            font-size: 1.3em;
+            text-align: center;
+            border-radius: 10px;
+            display: none;
+        }
+        button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .correct { background-color: #d4edda !important; }
+        .incorrect { background-color: #f8d7da !important; }
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            .question { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ôn tập Tin học 10 – Học kì I (Phần 1/2)</h1>
+        <p style="text-align:center; color:#e74c3c; font-weight:bold;">Phần 1: Câu 1-14 trắc nghiệm + Câu 1-2 đúng/sai</p>
+        
+        <form id="quizForm">
+            <div class="section">
+                <h2>I. PHẦN TRẮC NGHIỆM (Câu 1-14)</h2>
+                
+                <div class="question">
+                    <div class="question-text">Câu 1: 4GB = ? B</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q1" value="a"> 2^32 B</label></div>
+                        <div class="option"><label><input type="radio" name="q1" value="b"> 2^22 B</label></div>
+                        <div class="option"><label><input type="radio" name="q1" value="c"> 2^20 B</label></div>
+                        <div class="option"><label><input type="radio" name="q1" value="d"> 2^34 B</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 2: Vấn đề tiêu cực khi dùng Internet:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q2" value="a"> Học trực tuyến.</label></div>
+                        <div class="option"><label><input type="radio" name="q2" value="b"> Gửi email.</label></div>
+                        <div class="option"><label><input type="radio" name="q2" value="c"> Bắt nạt qua mạng.</label></div>
+                        <div class="option"><label><input type="radio" name="q2" value="d"> Đăng thông tin cần thiết.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 3: Trong NNLT Python, phép toán chia lấy phần nguyên là:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q3" value="a"> mod</label></div>
+                        <div class="option"><label><input type="radio" name="q3" value="b"> %</label></div>
+                        <div class="option"><label><input type="radio" name="q3" value="c"> div</label></div>
+                        <div class="option"><label><input type="radio" name="q3" value="d"> //</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 4: Thông tin là:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q4" value="a"> Hiểu biết của con người về sự vật.</label></div>
+                        <div class="option"><label><input type="radio" name="q4" value="b"> Hình ảnh, âm thanh.</label></div>
+                        <div class="option"><label><input type="radio" name="q4" value="c"> Văn bản và số liệu.</label></div>
+                        <div class="option"><label><input type="radio" name="q4" value="d"> Văn bản, hình ảnh, âm thanh.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 5: Để mở tệp ảnh trong GIMP ta chọn:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q5" value="a"> File / New</label></div>
+                        <div class="option"><label><input type="radio" name="q5" value="b"> File / Export As</label></div>
+                        <div class="option"><label><input type="radio" name="q5" value="c"> File / Exit</label></div>
+                        <div class="option"><label><input type="radio" name="q5" value="d"> File / Open</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 6: Nếu bị bắt nạt qua mạng, em sẽ chọn cách phòng vệ hợp lý nhất?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q6" value="a"> Tìm kiếm sự trợ giúp từ bạn thân, thầy cô giáo và người thân trong gia đình.</label></div>
+                        <div class="option"><label><input type="radio" name="q6" value="b"> Không xài mạng xã hội.</label></div>
+                        <div class="option"><label><input type="radio" name="q6" value="c"> Lên mạng kêu gọi sự đồng cảm.</label></div>
+                        <div class="option"><label><input type="radio" name="q6" value="d"> Lên mạng thanh minh.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 7: Dịch vụ hội nghị trực tuyến trên đám mây:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q7" value="a"> Google Meet</label></div>
+                        <div class="option"><label><input type="radio" name="q7" value="b"> Viettel IDC</label></div>
+                        <div class="option"><label><input type="radio" name="q7" value="c"> Outlook Email</label></div>
+                        <div class="option"><label><input type="radio" name="q7" value="d"> iCloud</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 8: Phát biểu phù hợp nhất về khả năng của máy tính:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q8" value="a"> Tất cả các ý trên.</label></div>
+                        <div class="option"><label><input type="radio" name="q8" value="b"> Giải trí.</label></div>
+                        <div class="option"><label><input type="radio" name="q8" value="c"> Soạn thảo văn bản.</label></div>
+                        <div class="option"><label><input type="radio" name="q8" value="d"> Xử lí thông tin.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 9: Phần mềm tự động hiện quảng cáo:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q9" value="a"> Virus</label></div>
+                        <div class="option"><label><input type="radio" name="q9" value="b"> Worm</label></div>
+                        <div class="option"><label><input type="radio" name="q9" value="c"> Spyware</label></div>
+                        <div class="option"><label><input type="radio" name="q9" value="d"> Adware</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 10: print(20 % 2) cho kết quả:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q10" value="a"> 1</label></div>
+                        <div class="option"><label><input type="radio" name="q10" value="b"> 0</label></div>
+                        <div class="option"><label><input type="radio" name="q10" value="c"> 3</label></div>
+                        <div class="option"><label><input type="radio" name="q10" value="d"> 2</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 11: Khẳng định sai về máy tính:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q11" value="a"> Nhỏ gọn.</label></div>
+                        <div class="option"><label><input type="radio" name="q11" value="b"> Không thể kết nối.</label></div>
+                        <div class="option"><label><input type="radio" name="q11" value="c"> Xử lí nhanh.</label></div>
+                        <div class="option"><label><input type="radio" name="q11" value="d"> Lưu trữ lớn.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 12: Chọn phản ánh tác động tích cực của mạng Internet?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q12" value="a"> Học trực tuyến có phương pháp, học lực được cải thiện.</label></div>
+                        <div class="option"><label><input type="radio" name="q12" value="b"> Lộ thông tin cá nhân.</label></div>
+                        <div class="option"><label><input type="radio" name="q12" value="c"> Tìm sẵn đáp án trên mạng.</label></div>
+                        <div class="option"><label><input type="radio" name="q12" value="d"> Tạo thói quen xấu: lười suy nghĩ.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 13: Điều nào sau đây có thể tránh máy tính bị lây nhiễm phần mềm độc hại?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q13" value="a"> Tải phần mềm từ trang không đáng tin cậy.</label></div>
+                        <div class="option"><label><input type="radio" name="q13" value="b"> Nháy chuột vào quảng cáo hấp dẫn rồi chuyển tới trang web lạ.</label></div>
+                        <div class="option"><label><input type="radio" name="q13" value="c"> Sử dụng phần mềm diệt virus.</label></div>
+                        <div class="option"><label><input type="radio" name="q13" value="d"> Dùng USB từ máy lạ mà không kiểm tra virus.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 14: Điện toán đám mây không thể cung cấp dịch vụ nào?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q14" value="a"> Thư tín điện tử.</label></div>
+                        <div class="option"><label><input type="radio" name="q14" value="b"> Cung cấp máy chủ.</label></div>
+                        <div class="option"><label><input type="radio" name="q14" value="c"> Bảo trì phần cứng tại gia đình.</label></div>
+                        <div class="option"><label><input type="radio" name="q14" value="d"> Lưu trữ.</label></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>II. PHẦN ĐÚNG / SAI (Câu 1-2)</h2>
+                
+                <div class="question">
+                    <div class="question-text">Câu 1: Trong phần mềm chỉnh sửa ảnh GIMP:</div>
+                    <div class="ds-item">a. Tô màu thuần nhất là phủ dải màu chuyển dần.<br>
+                        <label><input type="radio" name="ds1a" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds1a" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">b. Có thể cắt ảnh bằng công cụ Crop.<br>
+                        <label><input type="radio" name="ds1b" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds1b" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">c. Chỉ có một lớp ảnh background.<br>
+                        <label><input type="radio" name="ds1c" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds1c" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">d. Chỉ tạo vùng chọn bằng hình chữ nhật và elip.<br>
+                        <label><input type="radio" name="ds1d" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds1d" value="s"> Sai</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 2: Khi nói về mạng máy tính:</div>
+                    <div class="ds-item">a. Internet không có học liệu.<br>
+                        <label><input type="radio" name="ds2a" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds2a" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">b. Có thể bị lây nhiễm phần mềm độc hại.<br>
+                        <label><input type="radio" name="ds2b" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds2b" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">c. Chỉ cài antivirus mới ngăn virus.<br>
+                        <label><input type="radio" name="ds2c" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds2c" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">d. Xác thực hai bước giúp bảo vệ dữ liệu.<br>
+                        <label><input type="radio" name="ds2d" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds2d" value="s"> Sai</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="button" onclick="submitQuiz()">Nộp bài</button>
+            
+            <div class="result" id="result"></div>
+        </form>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const answers = {
+                q1: 'd', q2: 'c', q3: 'd', q4: 'a', q5: 'd', q6: 'a', q7: 'a', q8: 'a',
+                q9: 'd', q10: 'b', q11: 'b', q12: 'a', q13: 'c', q14: 'c',
+                ds1a: 's', ds1b: 'd', ds1c: 's', ds1d: 's',
+                ds2a: 's', ds2b: 'd', ds2c: 's', ds2d: 'd'
+            };
+
+            let correct = 0;
+            const total = Object.keys(answers).length;
+
+            document.querySelectorAll('.question, .ds-item').forEach(el => {
+                el.classList.remove('correct', 'incorrect');
+            });
+
+            for (let i = 1; i <= 14; i++) {
+                const name = 'q' + i;
+                const selected = document.querySelector(`input[name="${name}"]:checked`);
+                const questionDiv = selected ? selected.closest('.question') : null;
+                if (selected && selected.value === answers[name]) {
+                    correct++;
+                    if (questionDiv) questionDiv.classList.add('correct');
+                } else if (questionDiv) {
+                    questionDiv.classList.add('incorrect');
+                }
+            }
+
+            ['ds1a','ds1b','ds1c','ds1d','ds2a','ds2b','ds2c','ds2d'].forEach(key => {
+                const selected = document.querySelector(`input[name="${key}"]:checked`);
+                const itemDiv = selected ? selected.closest('.ds-item') : null;
+                if (selected && selected.value === answers[key]) {
+                    correct++;
+                    if (itemDiv) itemDiv.classList.add('correct');
+                } else if (itemDiv) {
+                    itemDiv.classList.add('incorrect');
+                }
+            });
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').innerHTML = `Bạn đã trả lời đúng <strong>${correct}</strong> / ${total} câu!`;
+        }
+    </script>
+</body>
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ôn tập Tin học 10 – Học kì I (Phần 2)</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 30px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .section {
+            margin-bottom: 40px;
+        }
+        .section h2 {
+            color: #2980b9;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        .question {
+            background: #f9f9f9;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #3498db;
+        }
+        .question-text {
+            font-weight: bold;
+            margin-bottom: 15px;
+            font-size: 1.1em;
+        }
+        .options {
+            display: flex;
+            flex-direction: column;
+        }
+        .option {
+            margin: 8px 0;
+        }
+        .ds-item {
+            margin: 15px 0;
+            padding: 10px;
+            background: #eef5ff;
+            border-radius: 8px;
+        }
+        .result {
+            margin-top: 30px;
+            padding: 20px;
+            background: #2ecc71;
+            color: white;
+            font-size: 1.3em;
+            text-align: center;
+            border-radius: 10px;
+            display: none;
+        }
+        button {
+            display: block;
+            width: 200px;
+            margin: 30px auto;
+            padding: 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .correct { background-color: #d4edda !important; }
+        .incorrect { background-color: #f8d7da !important; }
+        @media (max-width: 600px) {
+            .container { padding: 15px; }
+            .question { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Ôn tập Tin học 10 – Học kì I (Phần 2/2)</h1>
+        <p style="text-align:center; color:#e74c3c; font-weight:bold;">Phần 2: Câu 15-28 trắc nghiệm + Câu 3-4 đúng/sai</p>
+        
+        <form id="quizForm">
+            <div class="section">
+                <h2>I. PHẦN TRẮC NGHIỆM (Câu 15-28)</h2>
+                
+                <div class="question">
+                    <div class="question-text">Câu 15: Thông tin trong máy tính có dạng:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q15" value="a"> Hình ảnh.</label></div>
+                        <div class="option"><label><input type="radio" name="q15" value="b"> Văn bản.</label></div>
+                        <div class="option"><label><input type="radio" name="q15" value="c"> Âm thanh.</label></div>
+                        <div class="option"><label><input type="radio" name="q15" value="d"> Dãy bit.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 16: Máy tính trở thành công cụ không thể thiếu vì:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q16" value="a"> Tính toán nhanh.</label></div>
+                        <div class="option"><label><input type="radio" name="q16" value="b"> Soạn thảo văn bản.</label></div>
+                        <div class="option"><label><input type="radio" name="q16" value="c"> Lưu trữ và xử lý thông tin.</label></div>
+                        <div class="option"><label><input type="radio" name="q16" value="d"> Giải mọi bài toán.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 17: Khẳng định nào sau đây đúng khi nói về mạng Internet?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q17" value="a"> Không cần trả phí.</label></div>
+                        <div class="option"><label><input type="radio" name="q17" value="b"> Kết nối máy tính trong phạm vi nhỏ.</label></div>
+                        <div class="option"><label><input type="radio" name="q17" value="c"> Thuộc quyền sở hữu một tổ chức.</label></div>
+                        <div class="option"><label><input type="radio" name="q17" value="d"> Phải thuê bao dịch vụ đường truyền băng thông rộng.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 18: Để thay đổi kích thước ảnh ta dùng công cụ:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q18" value="a"> Transform</label></div>
+                        <div class="option"><label><input type="radio" name="q18" value="b"> Scale</label></div>
+                        <div class="option"><label><input type="radio" name="q18" value="c"> Crop</label></div>
+                        <div class="option"><label><input type="radio" name="q18" value="d"> Move</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 19: Phát biểu nào sau đây đúng về mạng Internet?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q19" value="a"> Mạng trong phạm vi quốc gia.</label></div>
+                        <div class="option"><label><input type="radio" name="q19" value="b"> Là mạng toàn cầu.</label></div>
+                        <div class="option"><label><input type="radio" name="q19" value="c"> Mạng trong thành phố.</label></div>
+                        <div class="option"><label><input type="radio" name="q19" value="d"> Bán kính nhỏ hơn LAN.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 20: Khẳng định nào sau đây là sai khi nói về GIMP?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q20" value="a"> Thiết kế đồ họa.</label></div>
+                        <div class="option"><label><input type="radio" name="q20" value="b"> Có công cụ vẽ.</label></div>
+                        <div class="option"><label><input type="radio" name="q20" value="c"> Chỉnh sửa ảnh.</label></div>
+                        <div class="option"><label><input type="radio" name="q20" value="d"> Không thể ghép ảnh.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 21: Hãy chọn tên dịch vụ không thuộc dịch vụ lưu trữ trên điện toán đám mây?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q21" value="a"> OneDrive</label></div>
+                        <div class="option"><label><input type="radio" name="q21" value="b"> DropBox</label></div>
+                        <div class="option"><label><input type="radio" name="q21" value="c"> Yahoo! Mail</label></div>
+                        <div class="option"><label><input type="radio" name="q21" value="d"> Google Drive</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 22: Tên biến Python đúng:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q22" value="a"> 1.Bai</label></div>
+                        <div class="option"><label><input type="radio" name="q22" value="b"> Bai1</label></div>
+                        <div class="option"><label><input type="radio" name="q22" value="c"> Bai#1</label></div>
+                        <div class="option"><label><input type="radio" name="q22" value="d"> Bai 1</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 23: Hành vi nào sau đây Không vi phạm đạo đức, pháp luật và văn hóa khi sử dụng mạng?</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q23" value="a"> Mua bản quyền phần mềm.</label></div>
+                        <div class="option"><label><input type="radio" name="q23" value="b"> Đưa thông tin không đúng sự thật.</label></div>
+                        <div class="option"><label><input type="radio" name="q23" value="c"> Ứng xử thiếu văn hóa.</label></div>
+                        <div class="option"><label><input type="radio" name="q23" value="d"> Bắt nạt qua mạng.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 24: Để tạo tệp ảnh mới ta chọn:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q24" value="a"> File / Open</label></div>
+                        <div class="option"><label><input type="radio" name="q24" value="b"> File / Exit</label></div>
+                        <div class="option"><label><input type="radio" name="q24" value="c"> File / New</label></div>
+                        <div class="option"><label><input type="radio" name="q24" value="d"> File / Save</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 25: Mật khẩu mạnh gồm:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q25" value="a"> Chữ hoa.</label></div>
+                        <div class="option"><label><input type="radio" name="q25" value="b"> Chữ số.</label></div>
+                        <div class="option"><label><input type="radio" name="q25" value="c"> Chữ thường.</label></div>
+                        <div class="option"><label><input type="radio" name="q25" value="d"> Chữ hoa, thường, số, ký tự đặc biệt.</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 26: Để tạo lớp mới ta chọn:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q26" value="a"> File / New</label></div>
+                        <div class="option"><label><input type="radio" name="q26" value="b"> Layer / New Layer</label></div>
+                        <div class="option"><label><input type="radio" name="q26" value="c"> File / Exit</label></div>
+                        <div class="option"><label><input type="radio" name="q26" value="d"> File / Open</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 27: Trong NNLT Python, kết quả xuất hiện trên màn hình sau khi thực hiện câu lệnh print("3+5") là:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q27" value="a"> ‘3+5’</label></div>
+                        <div class="option"><label><input type="radio" name="q27" value="b"> 3+5</label></div>
+                        <div class="option"><label><input type="radio" name="q27" value="c"> 8</label></div>
+                        <div class="option"><label><input type="radio" name="q27" value="d"> 35</label></div>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 28: Trong NNLT Python, kết quả của biến x sau khi thực hiện câu lệnh x = (20 // 5) là:</div>
+                    <div class="options">
+                        <div class="option"><label><input type="radio" name="q28" value="a"> 2</label></div>
+                        <div class="option"><label><input type="radio" name="q28" value="b"> 0</label></div>
+                        <div class="option"><label><input type="radio" name="q28" value="c"> 4</label></div>
+                        <div class="option"><label><input type="radio" name="q28" value="d"> 16</label></div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="section">
+                <h2>II. PHẦN ĐÚNG / SAI (Câu 3-4)</h2>
+                
+                <div class="question">
+                    <div class="question-text">Câu 3: Nhận định về tin học:</div>
+                    <div class="ds-item">a. Internet là thành tựu lớn của tin học.<br>
+                        <label><input type="radio" name="ds3a" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds3a" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">b. Thiết bị thông minh chỉ cần Internet.<br>
+                        <label><input type="radio" name="ds3b" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds3b" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">c. CMCN 4.0 là sản xuất thông minh.<br>
+                        <label><input type="radio" name="ds3c" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds3c" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">d. AI chưa từng thắng con người.<br>
+                        <label><input type="radio" name="ds3d" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds3d" value="s"> Sai</label>
+                    </div>
+                </div>
+                
+                <div class="question">
+                    <div class="question-text">Câu 4: Nhận định khác:</div>
+                    <div class="ds-item">a. Tốc độ tính toán là số phép toán/giây.<br>
+                        <label><input type="radio" name="ds4a" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds4a" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">b. AI là thành tựu của tin học.<br>
+                        <label><input type="radio" name="ds4b" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds4b" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">c. Bán tài khoản game là lừa đảo.<br>
+                        <label><input type="radio" name="ds4c" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds4c" value="s"> Sai</label>
+                    </div>
+                    <div class="ds-item">d. Like tin sai sự thật không vi phạm pháp luật.<br>
+                        <label><input type="radio" name="ds4d" value="d"> Đúng</label>
+                        <label><input type="radio" name="ds4d" value="s"> Sai</label>
+                    </div>
+                </div>
+            </div>
+            
+            <button type="button" onclick="submitQuiz()">Nộp bài</button>
+            
+            <div class="result" id="result"></div>
+        </form>
+    </div>
+
+    <script>
+        function submitQuiz() {
+            const answers = {
+                q15: 'd', q16: 'c', q17: 'd', q18: 'b', q19: 'b', q20: 'd', q21: 'c', q22: 'b',
+                q23: 'a', q24: 'c', q25: 'd', q26: 'b', q27: 'a', q28: 'c',
+                ds3a: 'd', ds3b: 's', ds3c: 'd', ds3d: 's',
+                ds4a: 'd', ds4b: 'd', ds4c: 'd', ds4d: 's'
+            };
+
+            let correct = 0;
+            const total = Object.keys(answers).length;
+
+            document.querySelectorAll('.question, .ds-item').forEach(el => {
+                el.classList.remove('correct', 'incorrect');
+            });
+
+            for (let i = 15; i <= 28; i++) {
+                const name = 'q' + i;
+                const selected = document.querySelector(`input[name="${name}"]:checked`);
+                const questionDiv = selected ? selected.closest('.question') : null;
+                if (selected && selected.value === answers[name]) {
+                    correct++;
+                    if (questionDiv) questionDiv.classList.add('correct');
+                } else if (questionDiv) {
+                    questionDiv.classList.add('incorrect');
+                }
+            }
+
+            ['ds3a','ds3b','ds3c','ds3d','ds4a','ds4b','ds4c','ds4d'].forEach(key => {
+                const selected = document.querySelector(`input[name="${key}"]:checked`);
+                const itemDiv = selected ? selected.closest('.ds-item') : null;
+                if (selected && selected.value === answers[key]) {
+                    correct++;
+                    if (itemDiv) itemDiv.classList.add('correct');
+                } else if (itemDiv) {
+                    itemDiv.classList.add('incorrect');
+                }
+            });
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('result').innerHTML = `Bạn đã trả lời đúng <strong>${correct}</strong> / ${total} câu!`;
+        }
+    </script>
+</body>
+</html>                                                                                                    </html>
